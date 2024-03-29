@@ -1,0 +1,14 @@
+package com.tech.blog.helper;
+
+public class Helper {
+	
+	public boolean deleteFile(String path) {
+		boolean f =false;
+		
+		
+		
+		
+		return f;
+	}
+
+}
