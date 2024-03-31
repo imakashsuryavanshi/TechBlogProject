@@ -29,6 +29,12 @@
 	.banner-background{
 		clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 94%, 71% 100%, 24% 93%, 0 100%, 0 0);
 	}
+	
+	body{
+		background: url(img/bg.jpg);
+		background-size: cover;
+		background-attachment: fixed;
+	}
 </style>
 <body>
 	<!-- Navbar  --> 
@@ -67,7 +73,7 @@
     <ul class="navbar-nav mr-right">
     
     	<li class="nav-item">
-        	<a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"><span class="fa fa-user-circle"></span> <%= user.getName() %></a>
+        	<a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"><span class="fa fa-user-circle"></span><b> <%= user.getName() %></b></a>
      	</li>
     	
     	<li class="nav-item">
@@ -315,7 +321,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-	<script type="text/javascript"></script>
+	<script type="text/javascript" src="js/js.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){

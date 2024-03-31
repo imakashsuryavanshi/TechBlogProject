@@ -1,3 +1,6 @@
+<%@page import="com.tech.blog.dao.LikeDao"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="com.tech.blog.dao.UserDao"%>
 <%@page import="com.tech.blog.entities.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.tech.blog.entities.Post"%>
@@ -57,6 +60,12 @@
 		border: 1px solid #e2e2e2;
 		padding-top: 15px;
 	}
+	
+	body{
+		background: url(img/bg.jpg);
+		background-size: cover;
+		background-attachment: fixed;
+	}
 </style>
 
 </head>
@@ -98,7 +107,7 @@
 	    <ul class="navbar-nav mr-right">
 	    
 	    	<li class="nav-item">
-	        	<a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"><span class="fa fa-user-circle"></span> <%= user.getName() %></a>
+	        	<a class="nav-link" href="#!" data-toggle="modal" data-target="#profile-modal"><span class="fa fa-user-circle"></span><b> <%= user.getName() %></b></a>
 	     	</li>
 	    	
 	    	<li class="nav-item">
@@ -132,10 +141,13 @@
 					
 					<div class="row my-2 row-user">
 						<div class="col-md-8">
-							<p class="post-user-info"><a href="#">Akash Suryavanshi</a> has posted:</p>
+						<%
+							UserDao ud = new UserDao(ConnectionProvider.getConnection());
+						%>
+							<p class="post-user-info"><a href="#"><%= ud.getUserByUserId(p.getUserId()).getName() %></a> has posted:</p>
 						</div>
 						<div class="col-md-4">
-							<p class="post-date"><%= p.getpDate().toLocaleString() %></p>
+							<p class="post-date"><%= DateFormat.getDateTimeInstance().format(p.getpDate()) %></p>
 						</div>
 					</div>
 					
@@ -146,7 +158,11 @@
 					</div>
 				</div>
 				<div class="card-footer primary-background">
-					<a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i> <span>10</span></a>
+				<%
+					LikeDao ld = new LikeDao(ConnectionProvider.getConnection());
+				%>
+				
+					<a href="#!" onclick="doLike(<%= p.getPid() %>,<%= user.getUserId() %>)" class="btn btn-outline-light btn-sm"><i class="fa fa-thumbs-o-up"></i> <span class="like-counter"><%= ld.countLikeOnPost(p.getPid()) %></span></a>
 					<a href="#!" class="btn btn-outline-light btn-sm"><i class="fa fa-commenting-o"></i> <span>20</span></a>
 				</div>
 				
@@ -335,7 +351,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-	<script type="text/javascript"></script>
+	<script type="text/javascript" src="js/js.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){
